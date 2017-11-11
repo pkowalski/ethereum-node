@@ -3,6 +3,8 @@
  * */
 const Web3Library = require('web3');
 
+const DEFAULT_UNLOCK_TIME = 15000;
+
 class EthereumConnection {
 
     constructor(url) {
@@ -32,7 +34,11 @@ class EthereumConnection {
     }
     
     getGasEstimate(data) {
-       return this.web3.eth.estimateGas({ data }); 
+       return this.web3.eth.estimateGas({ data: `0x${data}` }); 
+    }
+
+    unlockAccount(address, password, seconds = DEFAULT_UNLOCK_TIME) {
+        return this.web3.personal.unlockAccount(address, password, seconds);
     }
 }
 
