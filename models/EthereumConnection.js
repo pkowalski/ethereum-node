@@ -17,10 +17,12 @@ class EthereumConnection {
         const parsedContract = this.web3.eth.contract(JSON.parse(contract.getABI()));
         return parsedContract.new(...params, {
             from: sender,
-            data: contract.getByteCode,
-            gas: this.getGasEstimate(contract.getBtyeCode()),
+            data: `0x${contract.getByteCode()}`,
+            gas: `0x${this.getGasEstimate(contract.getByteCode())}`,
         }, function(err, pushedContract) {
+            console.log('return');
             if (err) {
+                console.log('error');
                 console.log(err);
                 return {};
             }
