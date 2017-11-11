@@ -7,11 +7,11 @@
   "author": "Mostafa Eweda <mo.eweda@gmail.com>",
   "dependencies": {
     "async": "~0.2.8",
+    "dotenv": "^4.0.0",
     "ethers": "^2.1.2",
     "ethers-wallet": "^2.1.2",
     "express": "^3.2.6",
-    "socket.io": "~0.9.14",
     "solc": "^0.4.17",
-    "web3": "^1.0.0-beta.23"
+    "web3": "github:ethereum/web3.js"
   }
 }
