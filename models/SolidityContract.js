@@ -9,10 +9,11 @@ const  FILE_ENCODING = 'utf8';
 
 class SolidityContract {
 
-    contructor(path, name) {
-        const source = fs.readFileSync(path, this.FILE_ENCODING);
+    constructor(path, name) {
+        const source = fs.readFileSync(path, this.FILE_ENCODING).toString();
         const contract = solc.compile(source, 1);
-        this.compiledContract = contract.contracts[name];
+        console.log(contract);
+        this.compiledContract = contract.contracts[`:${name}`];
     }
 
     getABI(contractName) {
