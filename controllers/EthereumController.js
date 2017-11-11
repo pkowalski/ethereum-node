@@ -3,11 +3,17 @@ const EthereumConnection = require('../models/EthereumConnection');
 const SolidityContract = require('../models/SolidityContract');
 
 function main(res, req) {
-    const privateKey = '0xf4ff887a7ac05d391cfa8e05940cbacefc9db6fdc7259f757fd88c7053fc0619';
-    const wallet = new EtherWallet(privateKey);
-    const connection = new EthereumConnection('http://localhost:8454');
-    const contract = new SolidityContract('./contracts/sampleContract', 'SampleContract');
-    const pushedContract = connection.pushContract(contract);
+    const connection = new EthereumConnection(process.env.ETHER_NET_URL);
+    const contract = new SolidityContract('contracts/Greeter.sol', 'greeter');
+    EtherWallet.buildFromWalletJSON(process.env.WALLET_FILE, process.env.WALLET_PASSWORD)
+    .then((wallet) => {
+        const etherWallet = wallet;
+        connection.unlockAccount(etherWallet.address, process.env.WALLET_PASSWORD);
+        const pushedContract = connection.pushContract(etherWallet.address, contract);
+    })
+    .catch((err) => {
+        console.log(err);
+    })
 }
 
 module.exports = {
