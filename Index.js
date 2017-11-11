@@ -12,5 +12,6 @@ app.server.listen(8080, () => {
 });
 
 app.get('/', eth.main)
+app.get('/balance', eth.getBalance);
 
 module.exports = app;

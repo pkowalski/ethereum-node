@@ -42,6 +42,10 @@ class EthereumConnection {
     unlockAccount(address, password, seconds = DEFAULT_UNLOCK_TIME) {
         return this.web3.personal.unlockAccount(address, password, seconds);
     }
+
+    getBalance(address) {
+        return this.web3.eth.getBalance(address);
+    }
 }
 
 module.exports = EthereumConnection;
