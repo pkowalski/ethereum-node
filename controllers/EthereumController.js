@@ -10,8 +10,8 @@ function main(req, res) {
         const etherWallet = wallet;
         connection.unlockAccount(etherWallet.address, process.env.WALLET_PASSWORD);
         const pushedContract = connection.pushContract(etherWallet.address, contract, 'jambo');
-        //res.send({ contract: pushedContract.greet() });
-        //res.send({ contract: pushedContract });
+        connection.callContractFunction(contract, pushedContract.address);
+        //res.send({ contract: pushedContract.address});
     })
     .catch((err) => {
         console.log(err);
